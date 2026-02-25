@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// User Model
+model User {
+  id                 String   @id @default(uuid())
+  name               String?
+  email              String   @unique
+  password_hash      String
+  phone              String?
+  dni_cpf            String?  @unique
+  is_driver_verified Boolean  @default(false)
+  reputation         Float    @default(5.0)
+  country            String   @default("BR") // 'BR' or 'AR'
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  trips_driven    Trip[]    @relation("DriverTrips")
+  bookings        Booking[]
+  reports_made    Report[]  @relation("Reporter")
+  reports_received Report[] @relation("Reported")
+}
+
+// Trip Model with PostGIS Geometry
+model Trip {
+  id              String   @id @default(uuid())
+  driver_id       String
+  driver          User     @relation("DriverTrips", fields: [driver_id], references: [id])
+  
+  // Geospatial Data (PostGIS)
+  // Note: Run 'CREATE EXTENSION postgis;' in your database first!
+  origin_coords   Unsupported("geometry(Point, 4326)")
+  dest_coords     Unsupported("geometry(Point, 4326)")
+  
+  origin_address  String
+  dest_address    String
+  departure_time  DateTime
+  seats_available Int
+  price           Decimal  @db.Decimal(10, 2)
+  currency        Currency
+  women_only      Boolean  @default(false)
+  status          TripStatus @default(SCHEDULED)
+  
+  bookings        Booking[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([driver_id])
+}
+
+// Booking Model
+model Booking {
+  id             String        @id @default(uuid())
+  trip_id        String
+  trip           Trip          @relation(fields: [trip_id], references: [id])
+  passenger_id   String
+  passenger      User          @relation(fields: [passenger_id], references: [id])
+  status         BookingStatus @default(PENDING)
+  payment_method PaymentMethod
+  payment_id     String?       // Mercado Pago ID
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([trip_id])
+  @@index([passenger_id])
+}
+
+// Report Model for Moderation
+model Report {
+  id          String   @id @default(uuid())
+  reporter_id String
+  reporter    User     @relation("Reporter", fields: [reporter_id], references: [id])
+  reported_id String
+  reported    User     @relation("Reported", fields: [reported_id], references: [id])
+  reason      String
+  status      ReportStatus @default(PENDING)
+  
+  createdAt   DateTime @default(now())
+}
+
+enum Currency {
+  BRL
+  ARS
+}
+
+enum TripStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  REJECTED
+}
+
+enum PaymentMethod {
+  PIX
+  CREDIT_CARD
+  MERCADO_PAGO_QR
+  EFECTIVO
+}
+
+enum ReportStatus {
+  PENDING
+  RESOLVED
+  DISMISSED
+}

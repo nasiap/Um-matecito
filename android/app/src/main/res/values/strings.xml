@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">un-matecito</string>
+    <string name="title_activity_main">un-matecito</string>
+    <string name="package_name">com.unmatecito.app</string>
+    <string name="custom_url_scheme">com.unmatecito.app</string>
+</resources>

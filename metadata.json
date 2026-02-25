@@ -1,0 +1,8 @@
+{
+  "name": "Un Matecito",
+  "description": "A social carpooling app for sharing rides and mate. Connect with drivers, book trips, and share the journey.",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera"
+  ]
+}
