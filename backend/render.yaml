@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: un-matecito-backend
+    env: node
+    region: ohio
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: FRONTEND_URL
+        value: "https://your-frontend-domain.com" # TODO: Update this to your deployed frontend URL
+      - key: DATABASE_URL
+        sync: false # Set this in the Render dashboard (PostgreSQL connection string with PostGIS)
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MERCADO_PAGO_ACCESS_TOKEN
+        sync: false

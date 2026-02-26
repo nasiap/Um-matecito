@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import * as bcrypt from 'bcryptjs';
-import * as jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import prisma from '../prismaClient.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_change_me';
