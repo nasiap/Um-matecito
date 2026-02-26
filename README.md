@@ -1,13 +1,33 @@
-<<<<<<< HEAD
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🧉 Um-matecito 🚗
 
-# Run and deploy your AI Studio app
+**Um-matecito** es una plataforma de carpooling (viajes compartidos) diseñada específicamente para la región costera de **Santa Catarina, Brasil** (Itapema, Balneário Camboriú, Florianópolis y alrededores). 
 
-This contains everything you need to run your app locally.
+El objetivo es conectar conductores con asientos libres y pasajeros que buscan una forma económica, ecológica y social de viajar.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1rrn3bbtfL_lYBmjCvRdMeN-d7oroEGf8
+---
+
+## ✨ Características Principales
+
+* **Seguridad Primero:** Verificación de identidad integrada para todos los usuarios.
+* **Modo Women-Only:** Espacios de viaje exclusivos para mujeres, aumentando la tranquilidad y seguridad.
+* **IA con Gemini:** Soporte inteligente para asistencia en el chat y gestión de viajes.
+* **Multiplataforma:** Desarrollado con **Capacitor** para funcionar en Android, iOS y Web.
+* **Backend Robusto:** Base de datos gestionada con **Prisma** y **Neon** para alta disponibilidad.
+
+## 🛠️ Stack Tecnológico
+
+* **Frontend:** React + Vite + Tailwind CSS
+* **Mobile:** Capacitor.js
+* **Backend:** Node.js + Express
+* **ORM:** Prisma
+* **IA:** Google Gemini API
+* **Base de Datos:** PostgreSQL (Neon)
+
+## 🚀 Instalación y Uso
+
+1. **Clonar el repo:**
+   ```bash
+   git clone [https://github.com/nasiap/Um-matecito.git](https://github.com/nasiap/Um-matecito.git)
 
 ## Run Locally
 
